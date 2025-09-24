@@ -1,26 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
+const inventoryModel = require('../models/inventory-model');
 
-<head>
-    <meta charset="UTF-8">
-    <title>
-        <%= title %>
-    </title>
-    <link rel="stylesheet" href="/css/styles.css">
-</head>
+// Display single vehicle detail
+async function vehicleDetail(req, res, next) {
+try {
+const inv_id = req.params.inv_id;
+const vehicle = await inventoryModel.getVehicleById(inv_id);
 
-<body>
-    <header>
-        <h1>
-            <%= title %>
-        </h1>
-    </header>
+if (!vehicle) {
+return res.status(404).render('errors/404', {
+title: 'Vehicle Not Found',
+message: 'No vehicle found with this ID.'
+});
+}
 
-    <main>
-        <%- vehicleHTML %> <!-- <%- renders raw HTML from the controller -->
-    </main>
+// Build the vehicle HTML string
+const vehicleHTML = `
+<div class="vehicle-detail-container">
+    <div class="vehicle-image">
+        <img src="/images/vehicles/${vehicle.inv_image}" alt="${vehicle.inv_make} ${vehicle.inv_model}">
+    </div>
+    <div class="vehicle-info">
+        <h2>${vehicle.inv_make} ${vehicle.inv_model}</h2>
+        <p><strong>Year:</strong> ${vehicle.inv_year}</p>
+        <p><strong>Price:</strong> $${vehicle.inv_price.toLocaleString()}</p>
+        <p><strong>Mileage:</strong> ${vehicle.inv_miles.toLocaleString()}</p>
+        <p>${vehicle.inv_description}</p>
+    </div>
+</div>
+`;
 
-    <%- include('../partials/footer') %>
-</body>
+res.render('inventory/detail', {
+title: `${vehicle.inv_make} ${vehicle.inv_model}`,
+vehicleHTML
+});
 
-</html>
+} catch (err) {
+console.error(err); // Log for Render debugging
+next(err); // Pass to 500 error handler
+}
+}
+
+module.exports = { vehicleDetail };
