@@ -6,10 +6,27 @@
         <%- include('partials/header') %>
             <%- include('partials/nav') %>
 
-                <main>
-                    <h2>Welcome to CSE Motors!</h2>
-                    <p>Find the best cars at unbeatable prices.</p>
-                    <img src="/images/car-banner.webp" alt="CSE Motors Banner">
+                <main class="home-container">
+                    <section class="hero">
+                        <h1>Welcome to CSE Motors!</h1>
+                        <p>Find the best cars at unbeatable prices.</p>
+                        <img src="/images/car-banner.webp" alt="CSE Motors Banner">
+                    </section>
+
+                    <section class="highlights">
+                        <div class="highlight-card">
+                            <h2>Wide Selection</h2>
+                            <p>Choose from a variety of cars, trucks, and SUVs.</p>
+                        </div>
+                        <div class="highlight-card">
+                            <h2>Affordable Prices</h2>
+                            <p>We offer competitive pricing for every budget.</p>
+                        </div>
+                        <div class="highlight-card">
+                            <h2>Trusted Service</h2>
+                            <p>Our experienced staff will help you find the perfect vehicle.</p>
+                        </div>
+                    </section>
                 </main>
 
                 <%- include('partials/footer') %>

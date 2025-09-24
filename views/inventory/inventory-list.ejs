@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head') %>
+
+    <body>
+        <%- include('../partials/header') %>
+            <%- include('../partials/nav') %>
+
+                <main class="inventory-grid">
+                    <% vehicles.forEach(vehicle=> { %>
+                        <div class="vehicle-card">
+                            <a href="/inventory/<%= vehicle.inv_id %>">
+                                <img src="<%= vehicle.inv_image %>"
+                                    alt="<%= vehicle.inv_make %> <%= vehicle.inv_model %>">
+                                <h3>
+                                    <%= vehicle.inv_make %>
+                                        <%= vehicle.inv_model %>
+                                </h3>
+                            </a>
+                            <p>Year: <%= vehicle.inv_year %>
+                            </p>
+                            <p>Price: $<%= Number(vehicle.inv_price).toLocaleString() %>
+                            </p>
+                            <p>Mileage: <%= Number(vehicle.inv_miles).toLocaleString() %> miles</p>
+                        </div>
+                        <% }) %>
+                </main>
+
+                <%- include('../partials/footer') %>
+    </body>
+
+</html>
