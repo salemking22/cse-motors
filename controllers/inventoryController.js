@@ -1,38 +1,36 @@
-const { getVehicleById, getAllVehicles } = require('../models/inventory-model');
+const inventoryModel = require('../models/inventory-model'); // your database/model functions
 
-// Vehicle detail page
-async function vehicleDetail(req, res, next) {
-    const inv_id = req.params.inv_id;
-
-    try {
-        const vehicle = await getVehicleById(inv_id);
-        if (!vehicle) {
-            return res.status(404).render('errors/404', {
-                title: 'Page Not Found',
-                message: 'Vehicle not found.'
-            });
-        }
-
-        res.render('inventory/vehicle-detail', {
-            title: `${vehicle.inv_make} ${vehicle.inv_model}`,
-            vehicle
-        });
-    } catch (error) {
-        next(error);
-    }
-}
-
-// Inventory list page
+// Display all vehicles (Inventory List)
 async function inventoryList(req, res, next) {
     try {
-        const vehicles = await getAllVehicles();
+        const vehicles = await inventoryModel.getAllVehicles(); // adjust based on your model function
         res.render('inventory/inventory-list', {
             title: 'Inventory',
             vehicles
         });
-    } catch (error) {
-        next(error);
+    } catch (err) {
+        next(err);
     }
 }
 
-module.exports = { vehicleDetail, inventoryList };
+// Display single vehicle detail
+async function vehicleDetail(req, res, next) {
+    try {
+        const inv_id = req.params.inv_id;
+        const vehicle = await inventoryModel.getVehicleById(inv_id); // adjust based on your model
+        if (!vehicle) {
+            return res.status(404).render('errors/404', {
+                title: 'Vehicle Not Found',
+                message: 'No vehicle found with this ID.'
+            });
+        }
+        res.render('inventory/detail', {
+            title: `${vehicle.make} ${vehicle.model}`,
+            vehicle
+        });
+    } catch (err) {
+        next(err);
+    }
+}
+
+module.exports = { inventoryList, vehicleDetail };
