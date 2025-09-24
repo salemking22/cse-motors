@@ -3,7 +3,7 @@ const inventoryModel = require('../models/inventory-model'); // your database/mo
 // Display all vehicles (Inventory List)
 async function inventoryList(req, res, next) {
     try {
-        const vehicles = await inventoryModel.getAllVehicles(); // adjust based on your model function
+        const vehicles = await inventoryModel.getAllVehicles();
         res.render('inventory/inventory-list', {
             title: 'Inventory',
             vehicles
@@ -17,19 +17,39 @@ async function inventoryList(req, res, next) {
 async function vehicleDetail(req, res, next) {
     try {
         const inv_id = req.params.inv_id;
-        const vehicle = await inventoryModel.getVehicleById(inv_id); // adjust based on your model
+        const vehicle = await inventoryModel.getVehicleById(inv_id);
+
         if (!vehicle) {
             return res.status(404).render('errors/404', {
                 title: 'Vehicle Not Found',
                 message: 'No vehicle found with this ID.'
             });
         }
+
+        // Build the vehicle HTML string
+        const vehicleHTML = `
+        <div class="vehicle-detail-container">
+            <div class="vehicle-image">
+                <img src="/images/vehicles/${vehicle.inv_image}" alt="${vehicle.inv_make} ${vehicle.inv_model}">
+            </div>
+            <div class="vehicle-info">
+                <h2>${vehicle.inv_make} ${vehicle.inv_model}</h2>
+                <p><strong>Year:</strong> ${vehicle.inv_year}</p>
+                <p><strong>Price:</strong> $${vehicle.inv_price.toLocaleString()}</p>
+                <p><strong>Mileage:</strong> ${vehicle.inv_miles.toLocaleString()}</p>
+                <p>${vehicle.inv_description}</p>
+            </div>
+        </div>
+        `;
+
+        // Render the detail view, passing the HTML string
         res.render('inventory/detail', {
-            title: `${vehicle.make} ${vehicle.model}`,
-            vehicle
+            title: `${vehicle.inv_make} ${vehicle.inv_model}`,
+            vehicleHTML
         });
+
     } catch (err) {
-        next(err);
+        next(err); // Pass to 500 error handler
     }
 }
 
