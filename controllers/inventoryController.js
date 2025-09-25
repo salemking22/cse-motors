@@ -26,8 +26,8 @@ async function vehicleDetail(req, res, next) {
             });
         }
 
-        // Build the image path directly from inv_image
-        const imageUrl = `/images/vehicles/${vehicle.inv_image}`;
+        // Use the full path from database directly
+        const imageUrl = vehicle.inv_image;
 
         // Pass the vehicle object and image URL to EJS
         res.render('inventory/detail', {
@@ -37,7 +37,7 @@ async function vehicleDetail(req, res, next) {
         });
 
     } catch (err) {
-        console.error(err); // Log errors for debugging
+        console.error(err); // Log errors
         next(err);
     }
 }
