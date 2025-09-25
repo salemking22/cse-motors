@@ -1,4 +1,4 @@
-const inventoryModel = require('../models/inventory-model'); // your database/model functions
+const inventoryModel = require('../models/inventory-model');
 
 // Display all vehicles (Inventory List)
 async function inventoryList(req, res, next) {
@@ -26,30 +26,15 @@ async function vehicleDetail(req, res, next) {
             });
         }
 
-        // Build the vehicle HTML string
-        const vehicleHTML = `
-        <div class="vehicle-detail-container">
-            <div class="vehicle-image">
-                <img src="/images/vehicles/${vehicle.inv_image}" alt="${vehicle.inv_make} ${vehicle.inv_model}">
-            </div>
-            <div class="vehicle-info">
-                <h2>${vehicle.inv_make} ${vehicle.inv_model}</h2>
-                <p><strong>Year:</strong> ${vehicle.inv_year}</p>
-                <p><strong>Price:</strong> $${vehicle.inv_price.toLocaleString()}</p>
-                <p><strong>Mileage:</strong> ${vehicle.inv_miles.toLocaleString()}</p>
-                <p>${vehicle.inv_description}</p>
-            </div>
-        </div>
-        `;
-
-        // Render the detail view, passing the HTML string
+        // 👉 Pass the vehicle object directly
         res.render('inventory/detail', {
             title: `${vehicle.inv_make} ${vehicle.inv_model}`,
-            vehicleHTML
+            vehicle
         });
 
     } catch (err) {
-        next(err); // Pass to 500 error handler
+        console.error(err);
+        next(err);
     }
 }
 
