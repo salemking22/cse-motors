@@ -26,10 +26,13 @@ async function vehicleDetail(req, res, next) {
             });
         }
 
-        // Encode the image filename so spaces and special characters work
-        const imageUrl = `/images/vehicles/${encodeURIComponent(vehicle.inv_image)}`;
+        // Build the image path safely (no encodeURIComponent)
+        // If image is missing, use a default placeholder
+        const imageUrl = vehicle.inv_image
+            ? `/images/vehicles/${vehicle.inv_image}`
+            : `/images/vehicles/default.jpg`;
 
-        // Pass the vehicle object and encoded image URL to EJS
+        // Pass the vehicle object and image URL to EJS
         res.render('inventory/detail', {
             title: `${vehicle.inv_make} ${vehicle.inv_model}`,
             vehicle,
@@ -37,8 +40,8 @@ async function vehicleDetail(req, res, next) {
         });
 
     } catch (err) {
-        console.error(err); // Log for debugging on Render
-        next(err); // Pass to 500 error handler
+        console.error(err); // Log errors on Render
+        next(err);
     }
 }
 

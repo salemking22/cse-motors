@@ -19,8 +19,8 @@
     <main>
         <div class="vehicle-detail-container">
             <div class="vehicle-image">
-                <!-- Use the encoded imageUrl passed from the controller -->
-                <img src="<%= imageUrl %>" alt="<%= vehicle.inv_make %> <%= vehicle.inv_model %>">
+                <!-- Image URL passed from controller -->
+                <img src="<%= imageUrl %>" alt="<%= vehicle.inv_make %> <%= vehicle.inv_model %>" loading="lazy">
             </div>
             <div class="vehicle-info">
                 <h2>
