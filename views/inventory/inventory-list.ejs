@@ -10,7 +10,7 @@
                     <% vehicles.forEach(vehicle=> { %>
                         <div class="vehicle-card">
                             <a href="/inventory/<%= vehicle.inv_id %>">
-                                <img src="<%= vehicle.inv_image %>"
+                                <img src="/images/vehicles/<%= vehicle.inv_image %>"
                                     alt="<%= vehicle.inv_make %> <%= vehicle.inv_model %>">
                                 <h3>
                                     <%= vehicle.inv_make %>
