@@ -26,15 +26,19 @@ async function vehicleDetail(req, res, next) {
             });
         }
 
-        // 👉 Pass the vehicle object directly
+        // Encode the image filename so spaces and special characters work
+        const imageUrl = `/images/vehicles/${encodeURIComponent(vehicle.inv_image)}`;
+
+        // Pass the vehicle object and encoded image URL to EJS
         res.render('inventory/detail', {
             title: `${vehicle.inv_make} ${vehicle.inv_model}`,
-            vehicle
+            vehicle,
+            imageUrl
         });
 
     } catch (err) {
-        console.error(err);
-        next(err);
+        console.error(err); // Log for debugging on Render
+        next(err); // Pass to 500 error handler
     }
 }
 
