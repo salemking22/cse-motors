@@ -4,9 +4,30 @@ const inventoryModel = require('../models/inventory-model');
 async function inventoryList(req, res, next) {
     try {
         const vehicles = await inventoryModel.getAllVehicles();
+
+        // Normalize image paths for inventory list
+        const normalizedVehicles = vehicles.map(vehicle => {
+            let imageUrl = vehicle.inv_image;
+
+            // Remove leading slash if present
+            if (imageUrl && imageUrl.startsWith("/")) {
+                imageUrl = imageUrl.substring(1);
+            }
+
+            // If no image, use placeholder
+            if (!imageUrl) {
+                imageUrl = "images/vehicles/default.jpg";
+            }
+
+            // Always prepend slash for correct URL
+            vehicle.inv_image = "/" + imageUrl;
+
+            return vehicle;
+        });
+
         res.render('inventory/inventory-list', {
             title: 'Inventory',
-            vehicles
+            vehicles: normalizedVehicles
         });
     } catch (err) {
         next(err);
@@ -26,10 +47,22 @@ async function vehicleDetail(req, res, next) {
             });
         }
 
-        // Use the full path from database directly
-        const imageUrl = vehicle.inv_image;
+        // Normalize image path for single page
+        let imageUrl = vehicle.inv_image;
 
-        // Pass the vehicle object and image URL to EJS
+        // Remove leading slash if present
+        if (imageUrl && imageUrl.startsWith("/")) {
+            imageUrl = imageUrl.substring(1);
+        }
+
+        // If no image, use placeholder
+        if (!imageUrl) {
+            imageUrl = "images/vehicles/default.jpg";
+        }
+
+        // Always prepend slash
+        imageUrl = "/" + imageUrl;
+
         res.render('inventory/detail', {
             title: `${vehicle.inv_make} ${vehicle.inv_model}`,
             vehicle,
@@ -37,7 +70,7 @@ async function vehicleDetail(req, res, next) {
         });
 
     } catch (err) {
-        console.error(err); // Log errors
+        console.error(err); // log errors
         next(err);
     }
 }
