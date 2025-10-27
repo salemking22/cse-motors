@@ -1,0 +1,182 @@
+/* Base styles for mobile */
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+header, nav, footer {
+  background-color: #004080;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+}
+
+main {
+  padding: 1rem;
+}
+
+/* Hero Section */
+.hero img {
+  width: 100%;
+  max-width: 700px;
+  height: auto;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.hero h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero ul {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+button {
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.upgrade-item p {
+  margin-top: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #002244 !important; /* ✅ correct syntax */
+  text-align: left;
+}
+/* Section spacing */
+.upgrades {
+  margin-top: 2rem;
+}
+
+/* Side-by-side layout */
+.upgrade-review-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: flex-start;
+  padding: 0 1rem;
+}
+
+/* Upgrade Grid Layout */
+.upgrade-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  flex: 1 1 60%;
+  max-width: 700px;
+}
+
+.upgrade-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1rem;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-left: 4px solid transparent;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.upgrade-item img {
+  width: 180px;
+  height: auto;
+  align-self: flex-start;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.upgrade-item img:hover {
+  transform: scale(1.05);
+}
+
+.upgrade-item p {
+  margin-top: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #002244 !important; /* ✅ correct syntax */
+  text-align: left;
+}
+
+/* Review Panel */
+.review-panel {
+  flex: 1 1 35%;
+  background-color: #fff;
+  padding: 1rem;
+  border-left: 4px solid #004080;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.review-panel h3 {
+  margin-top: 0;
+  font-size: 1.2rem;
+  color: #004080;
+}
+
+.review-panel ul {
+  padding-left: 1rem;
+  margin-top: 0.5rem;
+}
+
+.review-panel ul li {
+  margin-bottom: 0.5rem;
+}
+
+/* Footer */
+footer {
+  margin-top: 2rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* Responsive styles for larger screens */
+@media screen and (min-width: 768px) {
+  .hero h2 {
+    font-size: 2rem;
+  }
+
+  nav ul {
+    justify-content: space-around;
+  }
+}
+
+/* Responsive fallback for small screens */
+@media screen and (max-width: 767px) {
+  .upgrade-review-wrapper {
+    flex-direction: column;
+  }
+
+  .upgrade-grid,
+  .review-panel {
+    flex: 1 1 100%;
+  }
+
+  .upgrade-grid {
+    grid-template-columns: 1fr;
+  }
+}

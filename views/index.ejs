@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('partials/head') %>
+  <body>
+    <%- include('partials/header') %>
+    <%- include('partials/nav') %>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="hero">
+        <img src="/images/banner.png" alt="Toyota Corolla parked by the lake">
+        <h2>Toyota Corolla</h2>
+        <p>A reliable vehicle with sleek design. Perfect for families and single drivers alike.</p>
+        <ul>
+          <li>Smart infotainment system</li>
+          <li>Hybrid engine option</li>
+          <li>Comfort for every commute</li>
+        </ul>
+        <button>Book a Test Drive</button>
+      </section>
+
+      <!-- Upgrades and Reviews Side-by-Side -->
+      <section class="upgrade-review-wrapper">
+        <div class="upgrade-grid">
+          <div class="upgrade-item">
+            <img src="/images/sunroof.png" alt="Interior view showing open sunroof">
+            <p>Sunroof</p>
+          </div>
+          <div class="upgrade-item">
+            <img src="/images/leather-seats.png" alt="Close-up of leather car seats">
+            <p>Leather Seats</p>
+          </div>
+          <div class="upgrade-item">
+            <img src="/images/gps.png" alt="Dashboard with GPS navigation screen">
+            <p>GPS Navigation</p>
+          </div>
+          <div class="upgrade-item">
+            <img src="/images/dashcam.png" alt="Windshield-mounted dashcam in use">
+            <p>Dashcam</p>
+          </div>
+        </div>
+
+        <div class="review-panel">
+          <h3>Customer Reviews</h3>
+          <ul>
+            <li>“Smooth ride and sleek design.” (5/5)</li>
+            <li>“Affordable luxury in new life.” (4/5)</li>
+            <li>“Great fuel economy and comfort.” (5/5)</li>
+            <li>“Tech features are top-notch.” (4/5)</li>
+            <li>“Reliable and stylish — love it!” (5/5)</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <%- include('partials/footer') %>
+  </body>
+</html>
