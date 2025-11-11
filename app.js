@@ -3,8 +3,8 @@ const path = require('path');
 const app = express();
 const PORT = 5500;
 
-// Load inventory routes
-const inventoryRoute = require("./routes/inventoryRoute");
+// Week 2 route temporarily disabled
+// const inventoryRoute = require("./routes/inventoryRoute");
 
 // Set view engine to EJS
 app.set('view engine', 'ejs');
@@ -13,12 +13,12 @@ app.set('views', path.join(__dirname, 'views'));
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Use inventory routes
-app.use("/inv", inventoryRoute);
+// Week 2 route temporarily disabled
+// app.use("/inv", inventoryRoute);
 
 // Homepage route
 app.get('/', (req, res) => {
-  res.render('home'); // ✅ Updated to use your real homepage
+  res.render('home'); // ✅ Uses your real homepage
 });
 
 // 404 Not Found handler
