@@ -16,9 +16,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Week 2 route temporarily disabled
 // app.use("/inv", inventoryRoute);
 
-// Homepage route — restored to original Week 01
+// Homepage route — confirmed to use your full layout
 app.get('/', (req, res) => {
-  res.render('index'); // ✅ Uses your original homepage
+  res.render('index'); // ✅ Uses your real homepage with partials and layout
 });
 
 // 404 Not Found handler
