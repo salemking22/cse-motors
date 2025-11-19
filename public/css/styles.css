@@ -61,19 +61,11 @@ button {
   cursor: pointer;
 }
 
-.upgrade-item p {
-  margin-top: 0.5rem;
-  font-weight: 600;
-  font-size: 1rem;
-  color: #002244 !important; /* ✅ correct syntax */
-  text-align: left;
-}
-/* Section spacing */
+/* Upgrade Section */
 .upgrades {
   margin-top: 2rem;
 }
 
-/* Side-by-side layout */
 .upgrade-review-wrapper {
   display: flex;
   flex-wrap: wrap;
@@ -82,7 +74,6 @@ button {
   padding: 0 1rem;
 }
 
-/* Upgrade Grid Layout */
 .upgrade-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -119,7 +110,7 @@ button {
   margin-top: 0.5rem;
   font-weight: 600;
   font-size: 1rem;
-  color: #002244 !important; /* ✅ correct syntax */
+  color: #002244 !important;
   text-align: left;
 }
 
@@ -154,6 +145,28 @@ footer {
   text-align: center;
 }
 
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.trigger-error-link {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #000;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.trigger-error-link:hover {
+  background-color: #333;
+}
+
 /* Responsive styles for larger screens */
 @media screen and (min-width: 768px) {
   .hero h2 {
@@ -179,4 +192,59 @@ footer {
   .upgrade-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* ✅ Back to Home Button */
+.back-home {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.back-home .btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #004080;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.back-home .btn:hover {
+  background-color: #0066cc;
+}
+
+/* ✅ Error View Styling */
+.error-wrapper {
+  text-align: center;
+  padding: 2rem;
+}
+
+.error-wrapper h1 {
+  font-size: 1.8rem;
+  color: #004080;
+  margin-bottom: 1rem;
+}
+
+.error-wrapper p {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  color: #333;
+}
+
+.error-wrapper .btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #004080;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.error-wrapper .btn:hover {
+  background-color: #0066cc;
 }

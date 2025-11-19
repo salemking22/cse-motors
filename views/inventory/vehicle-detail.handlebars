@@ -1,0 +1,18 @@
+<!-- views/inventory/vehicle-detail.handlebars -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="/styles/main.css" />
+</head>
+<body>
+  {{> header}}   <!-- your nav partial -->
+  <main id="main-content">
+    {{{vehicleDetailHTML}}}  <!-- triple-stash to allow HTML -->
+  </main>
+
+  {{> footer}}  <!-- footer partial includes error link described below -->
+</body>
+</html>

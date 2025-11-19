@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <%- include('partials/head') %>
-  <title>Error</title>
+  <meta charset="UTF-8">
+  <title><%= title || 'CSE Motors' %></title>
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
   <%- include('partials/header') %>
   <%- include('partials/nav') %>
 
-  <main>
-    <h1><%= title %></h1>
-    <p>Status: <%= status %></p>
-    <p><%= message %></p>
-    <p>Sorry, something went wrong. Please try again later.</p>
-  </main>
+ <main class="error-wrapper">
+  <h1><%= title %></h1>
+  <p>Sorry, something went wrong.</p>
+  <div class="back-home">
+    <a href="/" class="btn">← Back to Home</a>
+  </div>
+</main>
 
   <%- include('partials/footer') %>
 </body>

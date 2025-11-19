@@ -8,12 +8,14 @@
 <body>
   <%- include('../partials/header') %>
   <%- include('../partials/nav') %>
-<main>
-  <h1><%= title %></h1>
-  <div class="vehicle-container">
-    <%- html %>
-  </div>
-</main>
+
+  <main>
+    <h1><%= title %></h1>
+
+    <!-- ✅ Vehicle Grid -->
+    <section class="classification-grid">
+      <%- grid %>
+    </section>
 
     <!-- ✅ Back to Home Button -->
     <div class="back-home">

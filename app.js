@@ -3,8 +3,8 @@ const path = require('path');
 const app = express();
 const PORT = 5500;
 
-// Week 2 route temporarily disabled
-// const inventoryRoute = require("./routes/inventoryRoute");
+// ✅ Corrected route import
+const inventoryRoute = require("./routes/inventory");
 
 // Set view engine to EJS
 app.set('view engine', 'ejs');
@@ -13,12 +13,19 @@ app.set('views', path.join(__dirname, 'views'));
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Week 2 route temporarily disabled
-// app.use("/inv", inventoryRoute);
+// Activate inventory routes
+app.use("/inv", inventoryRoute);
 
-// Homepage route — confirmed to use your full layout
 app.get('/', (req, res) => {
-  res.render('index'); // ✅ Uses your real homepage with partials and layout
+  res.render('index', {
+    title: 'Welcome to CSE Motors',
+    showBackButton: false
+  });
+});
+
+// Intentional 500 error route (for footer link)
+app.get('/trigger-error', (req, res) => {
+  throw new Error("Intentional server error for testing");
 });
 
 // 404 Not Found handler
