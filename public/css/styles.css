@@ -1,4 +1,4 @@
-/* Base styles for mobile */
+/* === Base styles for mobile === */
 body {
   font-family: 'Poppins', sans-serif;
   margin: 0;
@@ -33,7 +33,7 @@ main {
   padding: 1rem;
 }
 
-/* Hero Section */
+/* === Hero Section === */
 .hero img {
   width: 100%;
   max-width: 700px;
@@ -61,7 +61,7 @@ button {
   cursor: pointer;
 }
 
-/* Upgrade Section */
+/* === Upgrade Section === */
 .upgrades {
   margin-top: 2rem;
 }
@@ -114,7 +114,7 @@ button {
   text-align: left;
 }
 
-/* Review Panel */
+/* === Review Panel === */
 .review-panel {
   flex: 1 1 35%;
   background-color: #fff;
@@ -138,7 +138,7 @@ button {
   margin-bottom: 0.5rem;
 }
 
-/* Footer */
+/* === Footer === */
 footer {
   margin-top: 2rem;
   padding: 1rem;
@@ -167,7 +167,7 @@ footer {
   background-color: #333;
 }
 
-/* Responsive styles for larger screens */
+/* === Responsive styles for larger screens === */
 @media screen and (min-width: 768px) {
   .hero h2 {
     font-size: 2rem;
@@ -178,7 +178,7 @@ footer {
   }
 }
 
-/* Responsive fallback for small screens */
+/* === Responsive fallback for small screens === */
 @media screen and (max-width: 767px) {
   .upgrade-review-wrapper {
     flex-direction: column;
@@ -194,7 +194,7 @@ footer {
   }
 }
 
-/* ✅ Back to Home Button */
+/* === Back to Home Button === */
 .back-home {
   margin-top: 2rem;
   text-align: center;
@@ -215,7 +215,7 @@ footer {
   background-color: #0066cc;
 }
 
-/* ✅ Error View Styling */
+/* === Error View Styling === */
 .error-wrapper {
   text-align: center;
   padding: 2rem;
@@ -246,5 +246,121 @@ footer {
 }
 
 .error-wrapper .btn:hover {
+  background-color: #0066cc;
+}
+
+/* === Form Page Styling (Add Classification & Add Vehicle) === */
+form {
+  max-width: 600px;
+  margin: 2em auto;
+  padding: 1.5em;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 0.3em;
+  color: #004080;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="url"],
+input[type="email"],
+input[type="password"],
+select,
+textarea {
+  padding: 0.6em;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #f8f9fa;
+}
+
+input:valid,
+select:valid,
+textarea:valid {
+  border-color: #4CAF50;
+}
+
+input:invalid,
+select:invalid,
+textarea:invalid {
+  border-color: #f44336;
+}
+
+/* Flash message styling */
+.flash {
+  background-color: #ffdddd;
+  color: #a94442;
+  padding: 0.8em;
+  margin-bottom: 1em;
+  border: 1px solid #ebccd1;
+  border-radius: 4px;
+  text-align: center;
+}
+
+/* Form buttons */
+form button {
+  background-color: #004080;
+  color: white;
+  padding: 0.6em 1.2em;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #0066cc;
+}
+
+/* === Management Page Styling === */
+.management-wrapper {
+  max-width: 600px;
+  margin: 2em auto;
+  padding: 1.5em;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.management-wrapper h1 {
+  color: #004080;
+  margin-bottom: 1em;
+}
+
+.management-wrapper ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.management-wrapper li {
+  margin: 0.5em 0;
+}
+
+.management-wrapper a {
+  display: inline-block;
+  padding: 0.6em 1.2em;
+  background-color: #004080;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.management-wrapper a:hover {
   background-color: #0066cc;
 }

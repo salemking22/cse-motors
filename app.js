@@ -1,7 +1,22 @@
 const express = require('express');
 const path = require('path');
+const session = require('express-session'); // ✅ Add session support
+const flash = require('connect-flash');     // ✅ Add flash messaging
 const app = express();
 const PORT = 5500;
+
+// ✅ Middleware to parse form data
+app.use(express.urlencoded({ extended: true }));
+
+// ✅ Session configuration
+app.use(session({
+  secret: 'yourSecretKey', // replace with a secure secret
+  resave: false,
+  saveUninitialized: true,
+}));
+
+// ✅ Flash messaging middleware
+app.use(flash());
 
 // ✅ Corrected route import
 const inventoryRoute = require("./routes/inventory");
@@ -16,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Activate inventory routes
 app.use("/inv", inventoryRoute);
 
+// Home route
 app.get('/', (req, res) => {
   res.render('index', {
     title: 'Welcome to CSE Motors',

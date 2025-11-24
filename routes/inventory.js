@@ -2,6 +2,21 @@ const express = require('express');
 const router = express.Router();
 const inventoryController = require('../controllers/inventoryController');
 
+// Management view (URL example: /inv)
+router.get('/', inventoryController.buildManagementView);
+
+// Show the add classification form
+router.get('/add-classification', inventoryController.buildAddClassification);
+
+// Handle classification form submission
+router.post('/add-classification', inventoryController.addClassification);
+
+// Show the add vehicle form
+router.get('/add-vehicle', inventoryController.buildAddVehicle);
+
+// Handle vehicle form submission
+router.post('/add-vehicle', inventoryController.addVehicle);
+
 // Detail by inventory id (URL example: /inv/detail/23)
 router.get('/detail/:inventory_id', inventoryController.buildByInventoryId);
 

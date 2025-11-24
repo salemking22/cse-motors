@@ -1,4 +1,5 @@
 const pool = require('../database'); // assumes you're using pg Pool
+const invModel = require("../models/inventory-model");
 
 // Format price as currency
 function formatPrice(price) {
@@ -83,6 +84,16 @@ function buildClassificationGrid(data) {
   return grid;
 }
 
+// ✅ Build the classification dropdown for forms
+async function buildClassificationList(selectedId = null) {
+  const data = await invModel.getClassifications();
+  let list = "";
+  data.forEach((classification) => {
+    list += `<option value="${classification.classification_id}" ${selectedId == classification.classification_id ? "selected" : ""}>${classification.classification_name}</option>`;
+  });
+  return list;
+}
+
 // ✅ Build the navigation bar dynamically
 async function getNav() {
   try {
@@ -110,5 +121,6 @@ module.exports = {
   buildClassificationGrid,
   formatPrice,
   formatNumber,
-  getNav // ✅ Exported here
+  getNav,
+  buildClassificationList // ✅ now exported
 };

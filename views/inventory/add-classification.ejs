@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add New Classification</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <!-- ✅ Same header as detail view -->
+  <header>
+    <h1>Welcome to CSE Motors!</h1>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/inv/type/Sport">Sport</a></li>
+        <li><a href="/inv/type/SUV">SUV</a></li>
+        <li><a href="/inv/type/Luxury%20SUV">Luxury SUV</a></li>
+        <li><a href="/inv/type/Truck">Truck</a></li>
+        <li><a href="/account">My Account</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Add New Classification</h1>
+
+    <!-- Flash message area -->
+    <% if (message) { %>
+      <p class="flash"><%= message %></p>
+    <% } %>
+
+    <!-- Classification form -->
+    <form action="/inv/add-classification" method="post">
+      <label for="classification_name">Classification Name</label>
+      <input 
+        type="text" 
+        id="classification_name" 
+        name="classification_name" 
+        required 
+        pattern="^[A-Za-z]+$"
+        title="No spaces or special characters allowed"
+      >
+      <button type="submit">Add Classification</button>
+    </form>
+
+    <!-- Back to Home button -->
+    <div class="back-home">
+      <a href="/" class="btn">← Back to Home</a>
+    </div>
+  </main>
+
+  <!-- ✅ Same footer as detail view -->
+  <footer>
+    <div class="footer-content">
+      <p>© 2025, CSE 340 App</p>
+      <a href="/error" class="trigger-error-link">Trigger Error</a>
+    </div>
+  </footer>
+</body>
+</html>

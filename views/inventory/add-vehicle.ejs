@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add New Vehicle</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <!-- ✅ Same header as detail view -->
+  <header>
+    <h1>Welcome to CSE Motors!</h1>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/inv/type/Sport">Sport</a></li>
+        <li><a href="/inv/type/SUV">SUV</a></li>
+        <li><a href="/inv/type/Luxury%20SUV">Luxury SUV</a></li>
+        <li><a href="/inv/type/Truck">Truck</a></li>
+        <li><a href="/account">My Account</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Add New Vehicle</h1>
+
+    <% if (message) { %>
+      <p class="flash"><%= message %></p>
+    <% } %>
+
+    <!-- Vehicle form -->
+    <form action="/inv/add-vehicle" method="post">
+      <label for="classification_id">Classification</label>
+      <select name="classification_id" id="classification_id" required>
+        <option value="">Select a classification</option>
+        <%- classificationList %>
+      </select>
+
+      <label for="inv_make">Make</label>
+      <input type="text" name="inv_make" id="inv_make" required value="<%= vehicle?.inv_make || '' %>">
+
+      <label for="inv_model">Model</label>
+      <input type="text" name="inv_model" id="inv_model" required value="<%= vehicle?.inv_model || '' %>">
+
+      <label for="inv_year">Year</label>
+      <input type="number" name="inv_year" id="inv_year" required min="1900" max="2099" value="<%= vehicle?.inv_year || '' %>">
+
+      <label for="inv_description">Description</label>
+      <textarea name="inv_description" id="inv_description" required><%= vehicle?.inv_description || '' %></textarea>
+
+      <label for="inv_image">Image Path</label>
+      <input type="text" name="inv_image" id="inv_image" value="<%= vehicle?.inv_image || '/images/no-image.png' %>">
+
+      <label for="inv_thumbnail">Thumbnail Path</label>
+      <input type="text" name="inv_thumbnail" id="inv_thumbnail" value="<%= vehicle?.inv_thumbnail || '/images/no-image-thumb.png' %>">
+
+      <label for="inv_price">Price</label>
+      <input type="number" name="inv_price" id="inv_price" required step="0.01" min="0" placeholder="e.g. 14000.00" value="<%= vehicle?.inv_price || '' %>">
+
+      <label for="inv_miles">Miles</label>
+      <input type="number" name="inv_miles" id="inv_miles" required min="0" value="<%= vehicle?.inv_miles || '' %>">
+
+      <label for="inv_color">Color</label>
+      <input type="text" name="inv_color" id="inv_color" required value="<%= vehicle?.inv_color || '' %>">
+
+      <button type="submit">Add Vehicle</button>
+    </form>
+
+    <!-- Back to Home button -->
+    <div class="back-home">
+      <a href="/" class="btn">← Back to Home</a>
+    </div>
+  </main>
+
+  <!-- ✅ Same footer as detail view -->
+  <footer>
+    <div class="footer-content">
+      <p>© 2025, CSE 340 App</p>
+      <a href="/error" class="trigger-error-link">Trigger Error</a>
+    </div>
+  </footer>
+</body>
+</html>

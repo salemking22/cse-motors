@@ -1,0 +1,20 @@
+<%- include('../partials/header') %>
+
+<main>
+  <div class="management-wrapper">
+    <h1>Inventory Management</h1>
+
+    <!-- Flash message area -->
+    <% if (message) { %>
+      <p class="flash"><%= message %></p>
+    <% } %>
+
+    <!-- Links to the next tasks -->
+    <ul>
+      <li><a href="/inv/add-classification">Add New Classification</a></li>
+      <li><a href="/inv/add-vehicle">Add New Vehicle</a></li>
+    </ul>
+  </div>
+</main>
+
+<%- include('../partials/footer') %>
