@@ -1,5 +1,5 @@
 const pool = require('../database'); // use raw pool now
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');   // ✅ switched from bcrypt to bcryptjs
 const jwt = require('jsonwebtoken');
 
 // Show login form
