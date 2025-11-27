@@ -1,4 +1,4 @@
-const pool = require('../database'); // assumes you're using pg Pool
+const pool = require('../database'); // use raw pool now
 const invModel = require("../models/inventory-model");
 
 // Format price as currency
@@ -103,9 +103,11 @@ async function getNav() {
       ORDER BY classification_name;
     `;
     const result = await pool.query(sql);
+    const rows = result.rows;
+
     let nav = '<ul>';
     nav += `<li><a href="/">Home</a></li>`;
-    result.rows.forEach(row => {
+    rows.forEach(row => {
       nav += `<li><a href="/inv/type/${row.classification_id}" title="View our ${row.classification_name} vehicles">${row.classification_name}</a></li>`;
     });
     nav += `<li><a href="/account" title="Manage your account">My Account</a></li>`;
@@ -122,5 +124,5 @@ module.exports = {
   formatPrice,
   formatNumber,
   getNav,
-  buildClassificationList // ✅ now exported
+  buildClassificationList
 };

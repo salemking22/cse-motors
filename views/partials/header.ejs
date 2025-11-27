@@ -17,7 +17,18 @@
       <li><a href="/inv/type/2">SUV</a></li>
       <li><a href="/inv/type/3">Luxury SUV</a></li>
       <li><a href="/inv/type/4">Truck</a></li>
-      <li><a href="/account">My Account</a></li>
+
+      <% if (locals.loggedIn) { %>
+        <!-- Show when logged in -->
+        <li><a href="/account/logout">Logout</a></li>
+        <li><a href="/account/management">Welcome <%= locals.firstName %></a></li>
+      <% } else { %>
+        <!-- Show when logged out -->
+        <li><a href="/account/login">My Account</a></li>
+      <% } %>
     </ul>
   </nav>
 </header>
+
+</body>
+</html>

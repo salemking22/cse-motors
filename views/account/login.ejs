@@ -1,0 +1,21 @@
+<%- include('../partials/header') %>
+
+<h1 class="login-title">Login</h1>
+
+<% if (notice && notice.length > 0) { %>
+  <p class="flash"><%= notice %></p>
+<% } %>
+
+<section class="login-form">
+  <form action="/account/login" method="post">
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" required>
+
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password" required>
+
+    <button type="submit">Login</button>
+  </form>
+</section>
+
+<%- include('../partials/footer') %>

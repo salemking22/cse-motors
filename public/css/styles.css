@@ -364,3 +364,47 @@ form button:hover {
 .management-wrapper a:hover {
   background-color: #0066cc;
 }
+/* === Account Details Padding Fix === */
+.account-details {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  margin-top: 1rem;
+  text-align: left;
+}
+.management-content {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  margin-top: 1rem;
+  text-align: left;
+}
+.login-form {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+}
+.login-form label {
+  display: block;
+  margin-top: 1rem;
+}
+.login-form input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+}
+.login-form button {
+  margin-top: 1.5rem;
+  padding: 0.75rem;
+  width: 100%;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}/* === Login Title Styling === */
+.login-title {
+  margin-left: 2rem;
+  margin-top: 1rem;
+  color: #004080;
+  font-size: 1.8rem;
+}

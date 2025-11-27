@@ -1,0 +1,99 @@
+<%- include('../partials/header') %>
+
+<h1>Update Account Information</h1>
+
+<% if (notice && notice.length > 0) { %>
+  <p class="notice"><%= notice %></p>
+<% } %>
+
+<% if (errors && errors.length > 0) { %>
+  <ul class="errors">
+    <% errors.forEach(function(error) { %>
+      <li><%= error %></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<% if (accountData) { %>
+  <!-- ✅ Form 1: Account Info Update -->
+  <h2>Update Account Info</h2>
+  <form action="/account/update-info" method="POST">
+    <input type="hidden" name="account_id" value="<%= accountData.account_id %>">
+
+    <label for="first_name">First Name:</label>
+    <input type="text" id="first_name" name="first_name" value="<%= accountData.account_firstname %>" required>
+
+    <label for="last_name">Last Name:</label>
+    <input type="text" id="last_name" name="last_name" value="<%= accountData.account_lastname %>" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" value="<%= accountData.account_email %>" required>
+
+    <button type="submit">Update Info</button>
+  </form>
+
+  <!-- ✅ Form 2: Password Change -->
+  <h2>Change Password</h2>
+  <form action="/account/update-password" method="POST">
+    <input type="hidden" name="account_id" value="<%= accountData.account_id %>">
+
+    <label for="password">New Password:</label>
+    <input type="password" id="password" name="password" required>
+    <p>Password must be at least 8 characters and include a number and special character.</p>
+
+    <button type="submit">Change Password</button>
+  </form>
+<% } else { %>
+  <p>Please log in to update your account.</p>
+<% } %>
+
+<%- include('../partials/footer') %>
+
+<!-- ✅ Client-side validation script -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const forms = document.querySelectorAll('form');
+
+    forms.forEach(form => {
+      form.addEventListener('submit', (e) => {
+        let errors = [];
+
+        const firstName = form.querySelector('#first_name')?.value.trim();
+        const lastName = form.querySelector('#last_name')?.value.trim();
+        const email = form.querySelector('#email')?.value.trim();
+        const password = form.querySelector('#password')?.value.trim();
+
+        // First name
+        if (firstName !== undefined && (!firstName || !/^[A-Za-z]+$/.test(firstName))) {
+          errors.push('First name is required and must contain only letters.');
+        }
+
+        // Last name
+        if (lastName !== undefined && (!lastName || !/^[A-Za-z]+$/.test(lastName))) {
+          errors.push('Last name is required and must contain only letters.');
+        }
+
+        // Email
+        if (email !== undefined) {
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!email || !emailRegex.test(email)) {
+            errors.push('A valid email address is required.');
+          }
+        }
+
+        // Password
+        if (password !== undefined && password.length > 0) {
+          const strongPassword = /^(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/;
+          if (!strongPassword.test(password)) {
+            errors.push('Password must be at least 8 characters and include a number and special character.');
+          }
+        }
+
+        if (errors.length > 0) {
+          e.preventDefault();
+          alert(errors.join('\n'));
+        }
+      });
+    });
+  });
+</script>
