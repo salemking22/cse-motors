@@ -1,5 +1,7 @@
 const invModel = require('../models/inventory-model');
 const utilities = require('../utilities');
+const Review = require('../models/Review'); // ✅ import Review model
+const jwt = require('jsonwebtoken');
 
 // ✅ Management view
 async function buildManagementView(req, res, next) {
@@ -34,7 +36,6 @@ async function addClassification(req, res, next) {
   try {
     const { classification_name } = req.body;
 
-    // Server-side validation
     if (!classification_name || !/^[A-Za-z]+$/.test(classification_name)) {
       req.flash("notice", "Invalid classification name. Letters only, no spaces or special characters.");
       const nav = await utilities.getNav();
@@ -74,7 +75,7 @@ async function buildAddVehicle(req, res, next) {
       nav,
       classificationList,
       message: req.flash("notice"),
-      vehicle: {}, // empty object for first load
+      vehicle: {},
     });
   } catch (error) {
     next(error);
@@ -97,7 +98,6 @@ async function addVehicle(req, res, next) {
       inv_color,
     } = req.body;
 
-    // Server-side validation (basic example)
     if (!classification_id || !inv_make || !inv_model || !inv_year || !inv_price || !inv_miles) {
       req.flash("notice", "All required fields must be filled correctly.");
       const nav = await utilities.getNav();
@@ -166,7 +166,7 @@ async function addVehicle(req, res, next) {
   }
 }
 
-// ✅ Detail view by inventory ID
+// ✅ Detail view by inventory ID — includes reviews and loggedInUserId
 async function buildByInventoryId(req, res, next) {
   const inventoryId = parseInt(req.params.inventory_id, 10);
   if (!Number.isInteger(inventoryId) || inventoryId <= 0) {
@@ -183,11 +183,28 @@ async function buildByInventoryId(req, res, next) {
       throw error;
     }
 
-    const html = utilities.buildVehicleDetailHTML(vehicle);
+    const reviews = await Review.findByVehicle(inventoryId);
+    const nav = await utilities.getNav();
+
+    // ✅ Decode JWT to get logged-in user ID
+    let loggedInUserId = null;
+    if (req.cookies.jwt) {
+      try {
+        const decoded = jwt.verify(req.cookies.jwt, process.env.JWT_SECRET || 'fallbackSecret');
+        loggedInUserId = decoded.account_id;
+      } catch (err) {
+        console.error("JWT decode error:", err);
+      }
+    }
+
     res.render('inventory/detail', {
       title: `${vehicle.inv_make} ${vehicle.inv_model}`,
-      html,
-      showBackButton: true
+      vehicle,
+      reviews,
+      nav,
+      showBackButton: true,
+      message: req.flash("notice"),
+      loggedInUserId // ✅ passed to EJS
     });
   } catch (error) {
     next(error);
@@ -217,7 +234,8 @@ async function buildByClassificationId(req, res, next) {
       title: "Vehicles",
       nav,
       grid,
-      showBackButton: true
+      showBackButton: true,
+      message: req.flash("notice")
     });
   } catch (error) {
     next(error);

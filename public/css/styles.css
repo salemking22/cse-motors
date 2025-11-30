@@ -408,3 +408,7 @@ form button:hover {
   color: #004080;
   font-size: 1.8rem;
 }
+.stars {
+  color: rgb(191, 0, 255);
+  font-size: 1.2em;
+}

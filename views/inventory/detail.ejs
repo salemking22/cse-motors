@@ -6,14 +6,67 @@
   <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-  <!-- ✅ Only include header (it already has nav) -->
+  <!-- ✅ Header with nav -->
   <%- include('../partials/header') %>
 
   <main>
     <h1><%= title %></h1>
+
+    <!-- ✅ Vehicle details -->
     <div class="vehicle-container">
-      <%- html %>
+      <img src="<%= vehicle.inv_image %>" alt="<%= vehicle.inv_make %> <%= vehicle.inv_model %>">
+      <p><strong>Make:</strong> <%= vehicle.inv_make %></p>
+      <p><strong>Model:</strong> <%= vehicle.inv_model %></p>
+      <p><strong>Year:</strong> <%= vehicle.inv_year %></p>
+      <p><strong>Mileage:</strong> <%= vehicle.inv_miles %> miles</p>
+      <p><strong>Color:</strong> <%= vehicle.inv_color %></p>
+      <p><strong>Price:</strong> $<%= vehicle.inv_price %></p>
+      <p><strong>Description:</strong> <%= vehicle.inv_description %></p>
     </div>
+
+    <!-- ✅ Reviews section -->
+    <section class="reviews">
+      <h3>Reviews</h3>
+      <ul>
+        <% if (reviews && reviews.length > 0) { %>
+          <% reviews.forEach(review => { %>
+            <li>
+              <strong><%= review.reviewer_name || 'Anonymous' %></strong>
+              rated 
+              <span class="stars">
+                <%= (review.rating && review.rating >= 1 && review.rating <= 5) 
+                      ? '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating) 
+                      : '☆☆☆☆☆' %>
+              </span>
+              <p><%= review.comment || 'No comment provided.' %></p>
+              <small><%= review.created_at ? new Date(review.created_at).toLocaleString() : '' %></small>
+            </li>
+          <% }) %>
+        <% } else { %>
+          <li>No reviews yet. Be the first to add one!</li>
+        <% } %>
+      </ul>
+
+      <!-- ✅ Flash message area -->
+      <% if (message && message.length > 0) { %>
+        <div class="flash-message">
+          <%= message %>
+        </div>
+      <% } %>
+
+      <!-- ✅ Review form -->
+      <form action="/vehicles/<%= vehicle.inventory_id %>/reviews" method="POST" class="review-form">
+        <input type="hidden" name="inventory_id" value="<%= vehicle.inventory_id %>">
+
+        <label for="rating">Rating (1–5):</label>
+        <input type="number" name="rating" min="1" max="5" required>
+
+        <label for="comment">Comment:</label>
+        <textarea name="comment" required></textarea>
+
+        <button type="submit" class="btn">Submit Review</button>
+      </form>
+    </section>
 
     <!-- ✅ Back to Home Button -->
     <div class="back-home">

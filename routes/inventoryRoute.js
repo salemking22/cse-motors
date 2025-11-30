@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const inventoryController = require('../controllers/inventoryController');
+const reviewController = require('../controllers/reviewsController'); // ✅ NEW: import review controller
 const checkLogin = require('../utilities/checkLogin');
 const checkAccountType = require('../utilities/checkAccountType');
 
@@ -14,6 +15,9 @@ router.post('/add-vehicle', checkLogin, checkAccountType, inventoryController.ad
 // ✅ Public inventory views
 router.get('/detail/:inventory_id', inventoryController.buildByInventoryId);
 router.get('/type/:classification_id', inventoryController.buildByClassificationId);
+
+// ✅ Review submission route
+router.post('/vehicles/:inventory_id/reviews', reviewController.addReview); // ✅ NEW: review POST route
 
 // ✅ Intentional error route for testing 500 error
 router.get('/trigger-error', (req, res, next) => {
