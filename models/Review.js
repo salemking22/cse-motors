@@ -1,34 +1,34 @@
 const db = require('../database');
 
 // ✅ Create a new review
-exports.create = async (vehicleId, userId, rating, comment) => {
+exports.create = async (inventoryId, accountId, rating, comment) => {
   const query = `
-    INSERT INTO reviews (vehicle_id, user_id, rating, comment)
+    INSERT INTO reviews (inventory_id, account_id, review_rating, review_text)
     VALUES ($1, $2, $3, $4)
     RETURNING *;
   `;
-  const values = [vehicleId, userId, rating, comment];
+  const values = [inventoryId, accountId, rating, comment];
   const result = await db.query(query, values);
   return result.rows[0];
 };
 
 // ✅ Fetch reviews for a given vehicle
-exports.findByVehicle = async (vehicleId) => {
+exports.findByVehicle = async (inventoryId) => {
   const query = `
-    SELECT r.id AS review_id, r.vehicle_id, r.user_id, r.rating, r.comment, r.created_at,
+    SELECT r.review_id, r.inventory_id, r.account_id, r.review_rating, r.review_text, r.review_date,
            a.account_firstname || ' ' || a.account_lastname AS reviewer_name
     FROM reviews r
-    JOIN account a ON r.user_id = a.account_id
-    WHERE r.vehicle_id = $1
-    ORDER BY r.created_at DESC;
+    JOIN account a ON r.account_id = a.account_id
+    WHERE r.inventory_id = $1
+    ORDER BY r.review_date DESC;
   `;
-  const result = await db.query(query, [vehicleId]);
+  const result = await db.query(query, [inventoryId]);
   return result.rows;
 };
 
 // ✅ Fetch a single review by ID
 exports.findById = async (reviewId) => {
-  const query = `SELECT * FROM reviews WHERE id = $1`;
+  const query = `SELECT * FROM reviews WHERE review_id = $1`;
   const result = await db.query(query, [reviewId]);
   return result.rows[0];
 };
@@ -37,8 +37,8 @@ exports.findById = async (reviewId) => {
 exports.update = async (reviewId, rating, comment) => {
   const query = `
     UPDATE reviews
-    SET rating = $1, comment = $2
-    WHERE id = $3
+    SET review_rating = $1, review_text = $2
+    WHERE review_id = $3
     RETURNING *;
   `;
   const values = [rating, comment, reviewId];
@@ -48,7 +48,7 @@ exports.update = async (reviewId, rating, comment) => {
 
 // ✅ Delete a review
 exports.delete = async (reviewId) => {
-  const query = `DELETE FROM reviews WHERE id = $1`;
+  const query = `DELETE FROM reviews WHERE review_id = $1`;
   const result = await db.query(query, [reviewId]);
   return result.rowCount > 0;
 };
